@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>awsuum</title>
+</head>
+
+<body>
+<p>Rööööööööv</p>
+
+
+    <div id="messages">
+        <h1>Okej</h1>
+    </div>
+
+    <div id="time">
+        <h1>Time</h1>
+    </div>
+
+<script src="http://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script>
+        var socket = io();
+
+        function rdy(){
+                socket.emit('rdy',"GIEV DATA");
+        }
+
+        function getTime(){
+            socket.emit('trdy');
+        }
+        setInterval(getTime, 1000);
+
+        setInterval(rdy, 1000 * 60 * 0.2);
+
+        socket.on("OK", function(data) {
+            document.getElementById("messages").innerHTML = "<h1>" + data + "</h1>";
+        });
+
+        socket.on("time", function(data){
+            document.getElementById("time").innerHTML = "<h1>" + data + "</h1>";
+        });
+
+      
+    </script>
+
+
+</body>
+</html>
